@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "a1218aea-2ce3-4dad-95c6-777c65580ed7",
+		"name": "HW_2_postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19053819"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "Alex",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "gcsg34",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/login",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"let jsonData = pm.response.json();",
+							"let salary_check_12 = jsonData.person.u_name[1] *2.9",
+							"let salary_12 = jsonData.qa_salary_after_12_months",
+							"console.log (salary_check_12)",
+							"console.log (salary_12)",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    pm.expect(salary_12).to.eql(salary_check_12);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Alex\" ,\n    \"age\": 32,\n    \"salary\":2000,\n    \"auth_token\": \"/s34lfgbj/Alex/jjd909/38959kjkWpqc1543gcsg3469429evny\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "first",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"// статус код 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"// в body приходит правильный string",
+							"pm.test(\"в body приходит правильный string\", function () {",
+							"    pm.response.to.have.body();",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "hw_2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/first\n",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"first\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"// 2.статус код 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"// 3. Спарсить response body в json.",
+							"var jsonData = pm.response.json();",
+							"// 4. Проверить, что name в ответе равно name s request (name вбить руками.)",
+							"pm.test(\"name в ответе равно name s request\", function () {",
+							"    pm.expect(jsonData.name).to.eql('Denis');",
+							"});",
+							"// 5. Проверить, что age в ответе равно age s request (age вбить руками.)",
+							"pm.test(\"age в ответе равно age s request \", function () {",
+							"\tpm.expect(jsonData.age).to.eql('29')",
+							"\t})",
+							"// 6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)",
+							"pm.test(\"salary в ответе равно salary s request \", function () {",
+							"\tpm.expect(jsonData.salary).to.eql(700)",
+							"    })",
+							"// 7.Спарсить реквест.",
+							"var req = request.data;",
+							"// 8.Проверить, что name в ответе равно name s request (name забрать из request.)",
+							"pm.test(\"name в ответе равно name s request\", function () {",
+							"\tpm.expect(jsonData.name).to.eql(req.name)",
+							"\t})",
+							"// 9.Проверить, что age в ответе равно age s request (age забрать из request.)",
+							"pm.test(\"age в ответе равно age s request\", function () {",
+							"\tpm.expect(jsonData.age).to.eql(req.age);",
+							"\t})",
+							"// 10.Проверить, что salary в ответе равно salary s request (salary забрать из request.)",
+							"pm.test(\"salary в ответе равно salary s request\", function () {",
+							"\tpm.expect(jsonData.salary).to.eql(+ req.salary);",
+							"\t})",
+							"// 11.Вывести в консоль параметр family из response",
+							"console.log(jsonData.family)",
+							"// 12.Проверить что u_salary_1_5_year в ответе равно salary*4  (salary забрать из request)",
+							"pm.test(\"u_salary_1_5_year в ответе равно salary*4\", function () {",
+							"    pm.expect(jsonData.family.u_salary_1_5_year).to.eql(req.salary*4)",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Denis",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "29",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "700",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3\n",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3\n"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
